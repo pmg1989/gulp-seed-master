@@ -1,0 +1,40 @@
+﻿@import "../../compass/compass";
+@import "mixin/min";
+@import "mixin/config";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.equal-table {
+    @include equal-table();
+}
+
+.wrap {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.menu {
+    width: 100%;
+    background-color: #ff0000;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+
+    a {
+        display: inline-block;
+        width: 100%;
+
+        &:active {
+            background-color: darken(#ff0000,10%);
+        }
+    }
+}
