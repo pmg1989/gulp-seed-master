@@ -50,11 +50,11 @@ gulp.task('clean', function (cb) {
 //编译并合并压缩sass文件成style.css 、style.min.css 和 style.min.css.map 文件
 gulp.task('build:css', function () {
     return gulp.src(style.src + style.globs)
+               .pipe(sourcemaps.init())
                .pipe(concat(style.distName))
                .pipe(sass({ style: 'expanded' }).on('error', sass.logError))
                .pipe(autoprefixer(style.autoprefixer))
                .pipe(gulp.dest(style.dist))
-               .pipe(sourcemaps.init())
                .pipe(rename({ suffix: '.min' }))
                .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
                .pipe(sourcemaps.write('./'))
@@ -97,7 +97,7 @@ gulp.task('build:all', ['clean'], function () {
 
 gulp.task('watch:css', function () {
     livereload.listen();
-    gulp.watch(style.src + style.globs, ['build:css']);
+    gulp.watch(style.src + "/**/*.scss", ['build:css']);
 });
 
 gulp.task('watch:js', function () {
