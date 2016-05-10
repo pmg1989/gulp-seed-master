@@ -5,6 +5,8 @@
     sourcemaps = require('gulp-sourcemaps'),
     notify = require('gulp-notify'),
 
+    livereload = require('gulp-livereload'),
+
     sass = require("gulp-sass"),
     autoprefixer = require('gulp-autoprefixer'),
 
@@ -32,8 +34,7 @@ var config = {
     },
     images: {
         src: "./src/images",
-        glob: "/**/*",
-        //glob: "/**/*.{png,jpg,gif,ico}",
+        glob: "/**/*.{png,jpg,gif,ico}",
         dist: "./dist/images"
     }
 };
@@ -58,6 +59,7 @@ gulp.task('build:css', function () {
                .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
                .pipe(sourcemaps.write('./'))
                .pipe(gulp.dest(style.dist))
+               .pipe(livereload())
                .pipe(notify({ message: 'style task complete' }));
 });
 
@@ -71,12 +73,12 @@ gulp.task('build:js', function () {
       .pipe(uglify())
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest(script.dist))
+      .pipe(livereload())
       .pipe(notify({ message: 'script task complete' }));
 });
 
 gulp.task('build:images', function () {
     return gulp.src(images.src + images.glob)
-               //.pipe(cache(imagemin({ interlaced: true, pngquant: true, progressive: true })))
                .pipe(cache(imagemin({
                    optimizationLevel: 5, //类型：Number  默认：3  取值范围：0-7（优化等级）
                    progressive: true, //类型：Boolean 默认：false 无损压缩jpg图片
@@ -85,7 +87,8 @@ gulp.task('build:images', function () {
                })))
                .pipe(imagemin())
                .pipe(gulp.dest(images.dist))
-               .pipe(notify({ message: 'images task complete' }));
+               .pipe(livereload())
+               //.pipe(notify({ message: 'images task complete' }));
 });
 
 gulp.task('build:all', ['clean'], function () {
@@ -93,14 +96,17 @@ gulp.task('build:all', ['clean'], function () {
 });
 
 gulp.task('watch:css', function () {
+    livereload.listen();
     gulp.watch(style.src + style.globs, ['build:css']);
 });
 
 gulp.task('watch:js', function () {
+    livereload.listen();
     gulp.watch(script.src + script.globs, ['build:js']);
 });
 
 gulp.task('watch:images', function () {
+    livereload.listen();
     gulp.watch(images.src + images.globs, ['build:images']);
 });
 
