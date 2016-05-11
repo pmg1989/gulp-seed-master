@@ -1,21 +1,4 @@
-﻿@import "../../compass/compass";
-@import "mixin/min";
-@import "mixin/config";
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-a {
-    text-decoration: none;
-    color: #fff;
-}
-
-.equal-table {
-    @include equal-table();
-}
+﻿@import "layout";
 
 .wrap {
     max-width: 640px;

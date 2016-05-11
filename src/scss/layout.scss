@@ -1,0 +1,19 @@
+﻿@import "../../compass/_compass.scss";
+@import "mixin/config";
+@import "mixin/min";
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.equal-table {
+    @include equal-table();
+}

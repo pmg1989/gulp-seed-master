@@ -57,7 +57,7 @@ gulp.task('build:css', function () {
                .pipe(gulp.dest(style.dist))
                .pipe(rename({ suffix: '.min' }))
                .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
-               .pipe(sourcemaps.write('./'))
+               .pipe(sourcemaps.write('./', { includeContent: false, sourceRoot: "/src/scss" }))
                .pipe(gulp.dest(style.dist))
                .pipe(livereload())
                .pipe(notify({ message: 'style task complete' }));

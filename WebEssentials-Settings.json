@@ -168,7 +168,7 @@
   },
   "SweetJs": {
     "CompileOnBuild": false,
-    "CompileOnSave": true,
+    "CompileOnSave": false,
     "GenerateSourceMaps": true,
     "MinifyInPlace": false,
     "OutputDirectory": null,
